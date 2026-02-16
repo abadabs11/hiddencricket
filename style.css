@@ -1,0 +1,691 @@
+/* ── Reset & Base ──────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjQ.woff2') format('woff2');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  --bg: #140f4f;
+  --white: #ffffff;
+  --green: #34c759;
+  --red: #ff3b4a;
+  --blue: #0a91ff;
+  --yellow: #f0e8c0;
+  --board-light: #a4acb7;
+  --board-dark: #6d7481;
+  --board-base: #000000;
+  --border-gray: #807da7;
+  --placeholder: #6b7280;
+  --focus-purple: #6c63ff;
+  --font: 'Inter', system-ui, sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg);
+}
+
+/* ── Screen Management ────────────────────────────────── */
+.screen {
+  width: 100%;
+  height: 100dvh;
+  background-color: var(--bg);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ── Landing Page ─────────────────────────────────────── */
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 24px;
+}
+
+/* ── Title ────────────────────────────────────────────── */
+.title {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: 48px;
+  color: var(--white);
+  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  user-select: none;
+}
+
+/* ── Button Group ─────────────────────────────────────── */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Outline Button ───────────────────────────────────── */
+.outline-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 137px;
+  height: 49px;
+  padding: 16px;
+  border: 1px solid var(--white);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.1s ease, color 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.outline-btn:active,
+.outline-btn.active {
+  background-color: var(--white);
+  color: var(--bg);
+}
+
+.small-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 35px;
+  border: 1px solid var(--white);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--white);
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 30px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.12s ease, color 0.12s ease, opacity 0.12s ease;
+  padding: 0 12px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.small-btn:active {
+  background: var(--white);
+  color: var(--bg);
+}
+
+.small-btn:disabled {
+  background: #d3d9de;
+  border-color: #d3d9de;
+  color: #6b7280;
+  cursor: not-allowed;
+}
+
+.small-btn:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+.outline-btn:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+}
+
+/* ── Solid Green Button ───────────────────────────────── */
+.solid-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 137px;
+  height: 49px;
+  padding: 16px;
+  border: 1px solid var(--green);
+  border-radius: 6px;
+  background-color: var(--green);
+  color: var(--white);
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.solid-btn:active {
+  opacity: 0.85;
+}
+
+.solid-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ── Player Names Screen ──────────────────────────────── */
+.player-names {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 32px;
+}
+
+.players-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+/* ── Player Row ───────────────────────────────────────── */
+.player-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.player-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.player-label {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--white);
+  padding-left: 2px;
+}
+
+/* ── Text Field ───────────────────────────────────────── */
+.text-input {
+  width: 364px;
+  height: 49px;
+  padding: 12px 16px;
+  border: 2px solid var(--border-gray);
+  border-radius: 4px;
+  background-color: var(--white);
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 20px;
+  color: var(--bg);
+  outline: none;
+  transition: border-color 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.text-input::placeholder {
+  color: var(--placeholder);
+}
+
+.text-input:focus {
+  border-color: var(--focus-purple);
+}
+
+/* ── Checkbox ─────────────────────────────────────────── */
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  padding-bottom: 4px;
+}
+
+.checkbox-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--border-gray);
+  border-radius: 4px;
+  background-color: var(--white);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease;
+}
+
+.checkbox-input:focus {
+  border-color: var(--focus-purple);
+}
+
+.checkbox-input:checked {
+  border-color: var(--focus-purple);
+}
+
+.checkbox-input:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 20px;
+  border: solid var(--focus-purple);
+  border-width: 0 3px 3px 0;
+  transform: translate(-50%, -55%) rotate(45deg);
+}
+
+.checkbox-label {
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* ── Bottom Bar ───────────────────────────────────────── */
+.bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+}
+
+/* ── Game Screen ───────────────────────────────────────── */
+.game {
+  display: flex;
+  width: 100%;
+  height: 100dvh;
+}
+
+.game-pane {
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.scoreboard-pane {
+  padding: 18px 14px 18px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dartboard-pane {
+  padding: 14px 16px 16px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-back-btn {
+  position: absolute;
+  top: 18px;
+  left: 16px;
+}
+
+.undo-btn {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
+
+.scoreboard-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  margin: 2px 6px 14px 80px;
+  column-gap: 16px;
+}
+
+.players-header {
+  display: grid;
+  gap: 10px;
+}
+
+.player-header {
+  text-align: center;
+  opacity: 0.3;
+  transition: opacity 0.12s ease;
+}
+
+.player-header.active {
+  opacity: 1;
+}
+
+.player-name {
+  color: var(--white);
+  font-size: 14px;
+  line-height: 1.15;
+}
+
+.player-score {
+  color: var(--white);
+  font-size: 37px;
+  line-height: 1.1;
+  font-weight: 700;
+  margin-top: -2px;
+}
+
+.round-header {
+  text-align: center;
+  color: var(--white);
+}
+
+.round-label {
+  font-size: 14px;
+  display: block;
+}
+
+.round-value {
+  display: block;
+  font-size: 37px;
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.scoreboard-grid-wrap {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 0;
+}
+
+.scoreboard-grid {
+  width: min(96%, 460px);
+  display: grid;
+  grid-auto-rows: 1fr;
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  border-right: 1px solid rgba(255, 255, 255, 0.35);
+  position: relative;
+  min-height: 0;
+}
+
+.score-row {
+  display: grid;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+  position: relative;
+}
+
+.score-row:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.player-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.player-cell.first-player-cell {
+  border-left: none;
+}
+
+.player-cell[data-owned="true"] {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.number-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 40px;
+  font-weight: 700;
+  position: relative;
+}
+
+.hidden-banner {
+  position: absolute;
+  inset: 12% 0;
+  background: rgba(211, 217, 222, 0.88);
+}
+
+.tick-stack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+}
+
+.tick-mark {
+  position: relative;
+  color: inherit;
+}
+
+.tick-mark-1,
+.tick-mark-2 {
+  width: 21.3px;
+  height: 21.3px;
+}
+
+.tick-mark-3 {
+  width: 30px;
+  height: 30px;
+  border: 3px solid currentColor;
+  border-radius: 50%;
+}
+
+.tick-stroke {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  transform-origin: center center;
+  background: currentColor;
+}
+
+.tick-stroke.diag-neg {
+  transform: translateX(-50%) rotate(-45deg);
+}
+
+.tick-stroke.diag-pos {
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.tick-stroke.center {
+  margin-left: 0;
+}
+
+.tick-stroke.inset {
+  top: 15%;
+  height: 70%;
+}
+
+.tick-stroke.offset-neg {
+  margin-left: -6px;
+}
+
+.tick-stroke.offset-pos {
+  margin-left: 6px;
+}
+
+.dartboard-wrap {
+  width: min(100%, 540px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dartboard {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dartboard-segment {
+  stroke: #1a1a1a;
+  stroke-width: 1.1;
+  cursor: pointer;
+  transition: filter 0.12s ease;
+}
+
+.dartboard-segment:hover {
+  filter: brightness(1.08);
+}
+
+.dartboard-bull {
+  stroke: #1a1a1a;
+  stroke-width: 1.2;
+  cursor: pointer;
+}
+
+.dart-label {
+  fill: var(--white);
+  font-size: 17px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+}
+
+.dartboard-ring {
+  fill: none;
+  stroke: #1a1a1a;
+  stroke-width: 1.1;
+  pointer-events: none;
+}
+
+/* ── Landscape mobile scaling ─────────────────────────── */
+
+/* Small landscape phones (e.g. iPhone SE landscape ~568x320) */
+@media (max-height: 340px) and (orientation: landscape) {
+  .title {
+    font-size: 32px;
+  }
+  .landing {
+    gap: 16px;
+    padding: 12px;
+  }
+  .outline-btn {
+    height: 42px;
+    font-size: 17px;
+    width: 120px;
+  }
+  .solid-btn {
+    height: 42px;
+    font-size: 17px;
+    width: 120px;
+  }
+  .button-group {
+    gap: 8px;
+  }
+  .player-names {
+    padding: 12px 20px;
+  }
+  .players-form {
+    gap: 10px;
+  }
+  .text-input {
+    width: 260px;
+    height: 38px;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+  .checkbox-input {
+    width: 28px;
+    height: 28px;
+  }
+  .checkbox-input:checked::after {
+    width: 9px;
+    height: 16px;
+    border-width: 0 2.5px 2.5px 0;
+  }
+  .checkbox-label {
+    font-size: 14px;
+  }
+  .player-label {
+    font-size: 13px;
+  }
+  .player-row {
+    gap: 10px;
+  }
+  .player-name,
+  .round-label {
+    font-size: 12px;
+  }
+  .player-score,
+  .round-value {
+    font-size: 30px;
+  }
+  .scoreboard-grid {
+    width: min(98%, 430px);
+  }
+  .number-cell {
+    font-size: 30px;
+  }
+  .tick-stack {
+    width: 24px;
+    height: 24px;
+  }
+  .dart-label {
+    font-size: 14px;
+  }
+}
+
+/* Medium landscape phones (e.g. iPhone 14 landscape ~844x390) */
+@media (min-height: 341px) and (max-height: 440px) and (orientation: landscape) {
+  .title {
+    font-size: 40px;
+  }
+  .landing {
+    gap: 24px;
+    padding: 16px;
+  }
+  .player-names {
+    padding: 16px 28px;
+  }
+  .players-form {
+    gap: 14px;
+  }
+  .text-input {
+    width: 320px;
+    height: 44px;
+    font-size: 18px;
+  }
+  .checkbox-input {
+    width: 32px;
+    height: 32px;
+  }
+  .checkbox-input:checked::after {
+    width: 10px;
+    height: 18px;
+  }
+  .scoreboard-grid {
+    width: min(97%, 445px);
+  }
+  .number-cell {
+    font-size: 34px;
+  }
+  .dart-label {
+    font-size: 15px;
+  }
+}
+
+/* Larger landscape phones (e.g. iPhone Pro Max landscape ~932x430) */
+@media (min-height: 441px) and (max-height: 500px) and (orientation: landscape) {
+  .title {
+    font-size: 48px;
+  }
+}

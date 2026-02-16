@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="screen-orientation" content="landscape" />
+  <title>Hidden Cricket</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- Screen 1: Landing -->
+  <main class="screen landing" id="screen-landing">
+    <h1 class="title">HIDDEN CRICKET</h1>
+    <div class="button-group">
+      <button class="outline-btn" data-players="1">1 player</button>
+      <button class="outline-btn" data-players="2">2 players</button>
+      <button class="outline-btn" data-players="3">3 players</button>
+      <button class="outline-btn" data-players="4">4 players</button>
+    </div>
+  </main>
+
+  <!-- Screen 2: Player Names -->
+  <section class="screen player-names hidden" id="screen-players">
+    <div class="players-form" id="players-form">
+      <!-- Player rows injected by JS -->
+    </div>
+    <div class="bottom-bar">
+      <button class="small-btn" id="btn-back">Back</button>
+      <button class="solid-btn" id="btn-start">Start</button>
+    </div>
+  </section>
+
+  <!-- Screen 3: Game -->
+  <section class="screen game hidden" id="screen-game">
+    <div class="game-pane scoreboard-pane">
+      <button class="small-btn game-back-btn" id="btn-game-back">Back</button>
+
+      <header class="scoreboard-header">
+        <div class="players-header" id="players-header"></div>
+        <div class="round-header">
+          <span class="round-label">Round</span>
+          <span class="round-value" id="round-value">1/10</span>
+        </div>
+      </header>
+
+      <div class="scoreboard-grid-wrap">
+        <div class="scoreboard-grid" id="scoreboard-grid"></div>
+      </div>
+    </div>
+
+    <div class="game-pane dartboard-pane">
+      <div class="dartboard-wrap">
+        <svg
+          class="dartboard"
+          id="dartboard"
+          viewBox="-220 -220 440 440"
+          aria-label="Clickable dartboard"
+          role="img"
+        ></svg>
+      </div>
+      <button class="small-btn undo-btn" id="btn-undo">Undo</button>
+    </div>
+  </section>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
