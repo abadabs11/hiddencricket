@@ -20,6 +20,7 @@ const YELLOW = '#f0e8c0';
 const BULL = 'bull';
 const MAX_ROUND = 10;
 const THROWS_PER_TURN = 3;
+const VIEWPORT_SHRINK_FACTOR = 0.96;
 
 let playerCount = 0;
 let gameState = null;
@@ -30,7 +31,8 @@ let deferredInstallPrompt = null;
 
 function syncViewportHeight() {
   const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  document.documentElement.style.setProperty('--app-height', `${Math.round(viewportHeight)}px`);
+  const adjustedHeight = Math.max(260, viewportHeight * VIEWPORT_SHRINK_FACTOR);
+  document.documentElement.style.setProperty('--app-height', `${Math.round(adjustedHeight)}px`);
 }
 
 function showScreen(screen) {
