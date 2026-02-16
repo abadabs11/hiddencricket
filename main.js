@@ -5,10 +5,12 @@ const playersForm = document.getElementById('players-form');
 const btnBack = document.getElementById('btn-back');
 const btnStart = document.getElementById('btn-start');
 const btnGameBack = document.getElementById('btn-game-back');
+const btnReset = document.getElementById('btn-reset');
 const btnUndo = document.getElementById('btn-undo');
 const btnInstall = document.getElementById('btn-install');
 const playersHeader = document.getElementById('players-header');
 const roundValue = document.getElementById('round-value');
+const throwIndicator = document.getElementById('throw-indicator');
 const scoreboardGrid = document.getElementById('scoreboard-grid');
 const dartboardSvg = document.getElementById('dartboard');
 
@@ -180,7 +182,29 @@ function renderScoreboardHeader() {
     playersHeader.appendChild(header);
   });
 
+  renderThrowIndicator();
   roundValue.textContent = `${gameState.round}/${MAX_ROUND}`;
+}
+
+function renderThrowIndicator() {
+  if (!throwIndicator) return;
+
+  throwIndicator.innerHTML = '';
+  const activeThrowIndex = Math.min(gameState.throwsThisTurn, THROWS_PER_TURN - 1);
+
+  for (let i = 0; i < THROWS_PER_TURN; i += 1) {
+    const dot = document.createElement('span');
+    dot.className = 'throw-dot';
+    if (i < gameState.throwsThisTurn) dot.classList.add('completed');
+    if (i === activeThrowIndex) dot.classList.add('active');
+    throwIndicator.appendChild(dot);
+  }
+
+  const activePlayer = gameState.players[gameState.activePlayerIndex];
+  throwIndicator.setAttribute(
+    'aria-label',
+    `${activePlayer.name} throw ${activeThrowIndex + 1} of ${THROWS_PER_TURN}`,
+  );
 }
 
 function renderScoreboardGrid() {
@@ -253,6 +277,7 @@ function renderGame() {
   renderScoreboardGrid();
   updateBoardColors();
   btnUndo.disabled = historyStack.length === 0;
+  btnReset.disabled = gameState.players.every((player) => player.score === 0);
 }
 
 function updateTurnProgress() {
@@ -495,6 +520,18 @@ btnUndo.addEventListener('click', () => {
   if (!previous) return;
 
   gameState = previous;
+  renderGame();
+});
+
+btnReset.addEventListener('click', () => {
+  if (!gameState) return;
+  const hasAnyScore = gameState.players.some((player) => player.score !== 0);
+  if (!hasAnyScore) return;
+
+  historyStack.push(cloneGameState(gameState));
+  gameState.players.forEach((player) => {
+    player.score = 0;
+  });
   renderGame();
 });
 
