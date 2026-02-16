@@ -1,0 +1,25 @@
+{
+  "name": "Hidden Cricket",
+  "short_name": "Hidden Cricket",
+  "description": "Track hidden cricket scores with a clickable dartboard.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#140f4f",
+  "theme_color": "#140f4f",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "./icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/apple-touch-icon.svg",
+      "sizes": "180x180",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

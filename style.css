@@ -346,6 +346,13 @@ html, body {
   bottom: 16px;
 }
 
+.install-btn {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  z-index: 50;
+}
+
 .scoreboard-header {
   display: grid;
   grid-template-columns: 1fr auto;

@@ -6,6 +6,7 @@ const btnBack = document.getElementById('btn-back');
 const btnStart = document.getElementById('btn-start');
 const btnGameBack = document.getElementById('btn-game-back');
 const btnUndo = document.getElementById('btn-undo');
+const btnInstall = document.getElementById('btn-install');
 const playersHeader = document.getElementById('players-header');
 const roundValue = document.getElementById('round-value');
 const scoreboardGrid = document.getElementById('scoreboard-grid');
@@ -25,6 +26,7 @@ let gameState = null;
 const historyStack = [];
 const segmentsByTarget = new Map();
 const svgNS = 'http://www.w3.org/2000/svg';
+let deferredInstallPrompt = null;
 
 function showScreen(screen) {
   document.querySelectorAll('.screen').forEach((s) => s.classList.add('hidden'));
@@ -488,3 +490,29 @@ btnUndo.addEventListener('click', () => {
   gameState = previous;
   renderGame();
 });
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  btnInstall.classList.remove('hidden');
+});
+
+btnInstall.addEventListener('click', async () => {
+  if (!deferredInstallPrompt) return;
+
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  btnInstall.classList.add('hidden');
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  btnInstall.classList.add('hidden');
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js');
+  });
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="90" fill="#140f4f"/>
+  <circle cx="256" cy="256" r="176" fill="#a4acb7"/>
+  <circle cx="256" cy="256" r="122" fill="#8f98a5"/>
+  <circle cx="256" cy="256" r="72" fill="#a4acb7"/>
+  <circle cx="256" cy="256" r="24" fill="#8f98a5"/>
+  <text x="256" y="464" fill="#ffffff" text-anchor="middle" font-size="42" font-family="Inter, Arial, sans-serif" font-weight="700">HC</text>
+</svg>

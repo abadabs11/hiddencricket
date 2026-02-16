@@ -4,7 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="screen-orientation" content="landscape" />
+  <meta name="theme-color" content="#140f4f" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Hidden Cricket" />
   <title>Hidden Cricket</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg" />
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.svg" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -61,6 +69,8 @@
       <button class="small-btn undo-btn" id="btn-undo">Undo</button>
     </div>
   </section>
+
+  <button class="small-btn install-btn hidden" id="btn-install">Install</button>
 
   <script type="module" src="./main.js"></script>
 </body>
