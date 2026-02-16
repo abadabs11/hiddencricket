@@ -326,6 +326,7 @@ html, body {
   padding: 18px 14px 18px 16px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .dartboard-pane {
@@ -333,6 +334,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .game-back-btn {
@@ -385,7 +387,7 @@ html, body {
 
 .player-score {
   color: var(--white);
-  font-size: 37px;
+  font-size: clamp(22px, 5.4vh, 37px);
   line-height: 1.1;
   font-weight: 700;
   margin-top: -2px;
@@ -403,7 +405,7 @@ html, body {
 
 .round-value {
   display: block;
-  font-size: 37px;
+  font-size: clamp(22px, 5.4vh, 37px);
   line-height: 1.08;
   font-weight: 700;
 }
@@ -414,6 +416,7 @@ html, body {
   align-items: stretch;
   justify-content: center;
   min-height: 0;
+  overflow: hidden;
 }
 
 .scoreboard-grid {
@@ -456,7 +459,7 @@ html, body {
   align-items: center;
   justify-content: center;
   color: var(--white);
-  font-size: 40px;
+  font-size: clamp(24px, 5.8vh, 40px);
   font-weight: 700;
   position: relative;
 }
@@ -688,6 +691,79 @@ html, body {
   }
   .dart-label {
     font-size: 15px;
+  }
+}
+
+/* Tight landscape heights where scoreboard can overflow */
+@media (max-height: 430px) and (orientation: landscape) {
+  .scoreboard-pane {
+    padding: 10px 8px 10px 10px;
+  }
+  .dartboard-pane {
+    padding: 8px 10px 10px 8px;
+  }
+  .game-back-btn {
+    top: calc(8px + env(safe-area-inset-top));
+    left: 10px;
+  }
+  .undo-btn {
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+  }
+  .scoreboard-header {
+    margin: 0 2px 8px 66px;
+    column-gap: 10px;
+  }
+  .players-header {
+    gap: 6px;
+  }
+  .player-name,
+  .round-label {
+    font-size: 11px;
+  }
+  .player-score,
+  .round-value {
+    font-size: 24px;
+    line-height: 1.02;
+  }
+  .scoreboard-grid {
+    width: min(100%, 430px);
+  }
+  .number-cell {
+    font-size: 27px;
+  }
+  .hidden-banner {
+    inset: 18% 0;
+  }
+  .small-btn {
+    min-width: 52px;
+    height: 31px;
+    font-size: 24px;
+    padding: 0 9px;
+  }
+}
+
+@media (max-height: 360px) and (orientation: landscape) {
+  .scoreboard-pane {
+    padding: 8px 6px 8px 8px;
+  }
+  .scoreboard-header {
+    margin: 0 0 6px 58px;
+  }
+  .player-name,
+  .round-label {
+    font-size: 10px;
+  }
+  .player-score,
+  .round-value {
+    font-size: 20px;
+  }
+  .number-cell {
+    font-size: 24px;
+  }
+  .tick-stack {
+    width: 22px;
+    height: 22px;
   }
 }
 
