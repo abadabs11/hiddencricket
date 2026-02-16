@@ -5,6 +5,7 @@ const playersForm = document.getElementById('players-form');
 const btnBack = document.getElementById('btn-back');
 const btnStart = document.getElementById('btn-start');
 const btnGameBack = document.getElementById('btn-game-back');
+const btnReset = document.getElementById('btn-reset');
 const btnUndo = document.getElementById('btn-undo');
 const btnInstall = document.getElementById('btn-install');
 const playersHeader = document.getElementById('players-header');
@@ -276,6 +277,7 @@ function renderGame() {
   renderScoreboardGrid();
   updateBoardColors();
   btnUndo.disabled = historyStack.length === 0;
+  btnReset.disabled = gameState.players.every((player) => player.score === 0);
 }
 
 function updateTurnProgress() {
@@ -518,6 +520,18 @@ btnUndo.addEventListener('click', () => {
   if (!previous) return;
 
   gameState = previous;
+  renderGame();
+});
+
+btnReset.addEventListener('click', () => {
+  if (!gameState) return;
+  const hasAnyScore = gameState.players.some((player) => player.score !== 0);
+  if (!hasAnyScore) return;
+
+  historyStack.push(cloneGameState(gameState));
+  gameState.players.forEach((player) => {
+    player.score = 0;
+  });
   renderGame();
 });
 

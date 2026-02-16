@@ -349,6 +349,15 @@ html, body {
   bottom: calc(16px + env(safe-area-inset-bottom));
 }
 
+.reset-btn {
+  position: absolute;
+  left: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
+  min-width: 92px;
+  font-size: 18px;
+  padding: 0 14px;
+}
+
 .install-btn {
   position: fixed;
   right: 16px;
@@ -742,6 +751,13 @@ html, body {
     right: 10px;
     bottom: calc(10px + env(safe-area-inset-bottom));
   }
+  .reset-btn {
+    left: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom));
+    min-width: 84px;
+    font-size: 16px;
+    padding: 0 10px;
+  }
   .scoreboard-header {
     margin: 0 2px 8px 66px;
     column-gap: 10px;
@@ -781,6 +797,10 @@ html, body {
     height: 31px;
     font-size: 24px;
     padding: 0 9px;
+  }
+  .reset-btn {
+    min-width: 72px;
+    font-size: 14px;
   }
 }
 
