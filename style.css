@@ -359,12 +359,43 @@ html, body {
 .scoreboard-header {
   display: grid;
   grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'throw throw'
+    'players round';
   align-items: start;
   margin: 2px 6px 14px 80px;
   column-gap: 16px;
+  row-gap: 6px;
+}
+
+.throw-indicator {
+  grid-area: throw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 10px;
+}
+
+.throw-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+.throw-dot.completed {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.throw-dot.active {
+  background: var(--white);
+  transform: scale(1.08);
 }
 
 .players-header {
+  grid-area: players;
   display: grid;
   gap: 10px;
 }
@@ -394,6 +425,7 @@ html, body {
 }
 
 .round-header {
+  grid-area: round;
   text-align: center;
   color: var(--white);
 }
@@ -713,6 +745,15 @@ html, body {
   .scoreboard-header {
     margin: 0 2px 8px 66px;
     column-gap: 10px;
+    row-gap: 4px;
+  }
+  .throw-indicator {
+    gap: 5px;
+    min-height: 8px;
+  }
+  .throw-dot {
+    width: 7px;
+    height: 7px;
   }
   .players-header {
     gap: 6px;
@@ -749,6 +790,14 @@ html, body {
   }
   .scoreboard-header {
     margin: 0 0 6px 58px;
+    row-gap: 3px;
+  }
+  .throw-indicator {
+    gap: 4px;
+  }
+  .throw-dot {
+    width: 6px;
+    height: 6px;
   }
   .player-name,
   .round-label {

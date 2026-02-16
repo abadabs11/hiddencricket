@@ -9,6 +9,7 @@ const btnUndo = document.getElementById('btn-undo');
 const btnInstall = document.getElementById('btn-install');
 const playersHeader = document.getElementById('players-header');
 const roundValue = document.getElementById('round-value');
+const throwIndicator = document.getElementById('throw-indicator');
 const scoreboardGrid = document.getElementById('scoreboard-grid');
 const dartboardSvg = document.getElementById('dartboard');
 
@@ -180,7 +181,29 @@ function renderScoreboardHeader() {
     playersHeader.appendChild(header);
   });
 
+  renderThrowIndicator();
   roundValue.textContent = `${gameState.round}/${MAX_ROUND}`;
+}
+
+function renderThrowIndicator() {
+  if (!throwIndicator) return;
+
+  throwIndicator.innerHTML = '';
+  const activeThrowIndex = Math.min(gameState.throwsThisTurn, THROWS_PER_TURN - 1);
+
+  for (let i = 0; i < THROWS_PER_TURN; i += 1) {
+    const dot = document.createElement('span');
+    dot.className = 'throw-dot';
+    if (i < gameState.throwsThisTurn) dot.classList.add('completed');
+    if (i === activeThrowIndex) dot.classList.add('active');
+    throwIndicator.appendChild(dot);
+  }
+
+  const activePlayer = gameState.players[gameState.activePlayerIndex];
+  throwIndicator.setAttribute(
+    'aria-label',
+    `${activePlayer.name} throw ${activeThrowIndex + 1} of ${THROWS_PER_TURN}`,
+  );
 }
 
 function renderScoreboardGrid() {
