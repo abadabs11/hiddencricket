@@ -28,6 +28,11 @@ const segmentsByTarget = new Map();
 const svgNS = 'http://www.w3.org/2000/svg';
 let deferredInstallPrompt = null;
 
+function syncViewportHeight() {
+  const viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+  document.documentElement.style.setProperty('--app-height', `${Math.round(viewportHeight)}px`);
+}
+
 function showScreen(screen) {
   document.querySelectorAll('.screen').forEach((s) => s.classList.add('hidden'));
   screen.classList.remove('hidden');
@@ -515,4 +520,11 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js');
   });
+}
+
+syncViewportHeight();
+window.addEventListener('resize', syncViewportHeight);
+window.addEventListener('orientationchange', syncViewportHeight);
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', syncViewportHeight);
 }

@@ -28,6 +28,7 @@
   --placeholder: #6b7280;
   --focus-purple: #6c63ff;
   --font: 'Inter', system-ui, sans-serif;
+  --app-height: 100svh;
 }
 
 html, body {
@@ -43,7 +44,7 @@ html, body {
 /* ── Screen Management ────────────────────────────────── */
 .screen {
   width: 100%;
-  height: 100dvh;
+  height: var(--app-height);
   background-color: var(--bg);
 }
 
@@ -336,20 +337,20 @@ html, body {
 
 .game-back-btn {
   position: absolute;
-  top: 18px;
+  top: calc(18px + env(safe-area-inset-top));
   left: 16px;
 }
 
 .undo-btn {
   position: absolute;
   right: 16px;
-  bottom: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
 }
 
 .install-btn {
   position: fixed;
   right: 16px;
-  top: 16px;
+  top: calc(16px + env(safe-area-inset-top));
   z-index: 50;
 }
 
